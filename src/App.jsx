@@ -6,13 +6,22 @@ import { useEffect, useState } from "react";
 
 function App() {
 
-  // const [sightings, setSightings] = useState({})
+  const [sightings, setSightings] = useState({})
 
   useEffect(()=>{
     axios.get("http://localhost:3001/sightings")
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res.data)
+        setSightings(res.data)
+      })
       .catch(err=>console.log(err))
-  })
+  },[])
+
+  // const SightingArr = sightings.map((sightings.data)=>(
+  //   <div>
+  //     <p>{sighting.data}</p>
+  //   </div>
+  // ))
 
   return (
     <>
@@ -21,6 +30,7 @@ function App() {
       </div>
       <h1>Bigfoot Frontend </h1>
       <div className="card">
+        <p>{sightings[0]?.YEAR}</p>
         <p>
           <small>You know what they say about big feet...</small>
         </p>
