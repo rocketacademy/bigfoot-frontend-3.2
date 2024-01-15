@@ -1,5 +1,7 @@
-function IndividualSighting(props) {
+import axios from "axios";
 
+function IndividualSighting(props) {
+  
   return ( 
     <>
     <h1>HELLO WORLD</h1>

@@ -1,42 +1,44 @@
 import { useEffect } from "react";
 import axios from "axios";
 import logo from "/logo.png";
+import { useNavigate } from "react-router-dom";
 
 function Home(props) {
   let { sightings, setSightings } = props;
 
+  const navigate = useNavigate()
 
-   useEffect(() => {
-     axios
-       .get("http://localhost:3001/sightings")
-       .then((res) => {
-         console.log(res.data);
-         setSightings(res.data);
-       })
-       .catch((err) => console.log(err));
-   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/sightings")
+      .then((res) => {
+        console.log(res.data);
+        setSightings(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-   const sightingArr = sightings.map((sighting, index) => (
-     <li key={index} className="report-list__item">
-       <div className="list__item-container">
-         <div className="container__report-detail">
-           <p className="report-detail">{sighting.REPORT_NUMBER}</p>
-         </div>
-         <div className="container__report-detail">
-           <p className="report-detail">{sighting.STATE}</p>
-         </div>
-         <div className="container__report-detail">
-           <p className="report-detail">{sighting.COUNTY}</p>
-         </div>
-         <div className="container__report-detail">
-           <p className="report-detail">{sighting.YEAR}</p>
-         </div>
-         <div className="container__report-detail">
-           <p className="report-detail">{sighting.REPORT_CLASS}</p>
-         </div>
-       </div>
-     </li>
-   ));
+  const sightingArr = sightings.map((sighting, index) => (
+    <li key={index} className="report-list__item">
+      <div className="list__item-container" onClick={()=>navigate(`/sightings/${index}`)} >
+        <div className="container__report-detail">
+          <p className="report-detail">{sighting.REPORT_NUMBER}</p>
+        </div>
+        <div className="container__report-detail">
+          <p className="report-detail">{sighting.STATE}</p>
+        </div>
+        <div className="container__report-detail">
+          <p className="report-detail">{sighting.COUNTY}</p>
+        </div>
+        <div className="container__report-detail">
+          <p className="report-detail">{sighting.YEAR}</p>
+        </div>
+        <div className="container__report-detail">
+          <p className="report-detail">{sighting.REPORT_CLASS}</p>
+        </div>
+      </div>
+    </li>
+  ));
 
   return (
     <>

@@ -44,6 +44,7 @@
 .list__item-container, .list__header-container{
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .container__report-detail{
