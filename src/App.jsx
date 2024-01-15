@@ -1,8 +1,19 @@
 import logo from "/logo.png";
-
+import axios from "axios"
 import "./App.css";
+import { useEffect, useState } from "react";
+
 
 function App() {
+
+  // const [sightings, setSightings] = useState({})
+
+  useEffect(()=>{
+    axios.get("http://localhost:3001/sightings")
+      .then(res => console.log(res))
+      .catch(err=>console.log(err))
+  })
+
   return (
     <>
       <div>
@@ -11,7 +22,7 @@ function App() {
       <h1>Bigfoot Frontend </h1>
       <div className="card">
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          <small>You know what they say about big feet...</small>
         </p>
       </div>
     </>
