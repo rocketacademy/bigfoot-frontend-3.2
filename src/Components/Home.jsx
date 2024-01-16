@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import logo from "/logo.png";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "./constants";
 
 function Home(props) {
   let { sightings, setSightings } = props;
@@ -10,7 +11,7 @@ function Home(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/sightings")
+      .get(`${BACKEND_URL}/sightings`)
       .then((res) => {
         setSightings(res.data);
       })

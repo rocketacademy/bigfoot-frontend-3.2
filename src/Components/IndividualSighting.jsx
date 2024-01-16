@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { BACKEND_URL } from "./constants";
 
 function IndividualSighting(props) {
 
@@ -11,7 +12,7 @@ function IndividualSighting(props) {
   const navigate = useNavigate()
 
   useEffect(()=>{
-    axios.get(`http://localhost:3001/sightings/${sightingIndex}`)
+    axios.get(`${BACKEND_URL}/sightings/${sightingIndex}`)
     .then((res)=>{
       setIndividualSightingData(res.data)
     })
