@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { backendURL } from "../db";
 import { useParams } from "react-router-dom";
+import SightingsList from "./SightingList";
 
 function Sightings() {
   const [BFSightings, setBFSightings] = useState([]);
@@ -28,42 +29,22 @@ function Sightings() {
     bigfootdata();
   }, [sightingIndex]);
 
-  //display all sightings
-  const SightingsList = ({ sightings }) => {
-    console.log("logged sights", sightings);
-    return (
-      <ul>
-        <li>
-          <strong>Sighting {Number(sightingIndex) + 1}:</strong>
-          <ul>
-            <li>
-              <strong>Date: </strong> {sightings.DATE} {sightings.MONTH},{" "}
-              {sightings.YEAR}
-            </li>
-            <li>
-              <strong>Season:</strong> {sightings.SEASON}
-            </li>
-            <li>
-              <strong>Location:</strong> {sightings.LOCATION_DETAILS},{" "}
-              {sightings.STATE}
-            </li>
-            <li>
-              <strong>Observation:</strong> {sightings.OBSERVED}
-            </li>
-            <br />
-          </ul>
-        </li>
-      </ul>
-    );
-  };
-
   return (
     <>
-      <h1>Bigfoot Frontend </h1>
-      <div className="card">
-        <h3>Bigfoot Sightings</h3>
-        <SightingsList sightings={BFSightings} />
-      </div>
+      {sightingIndex ? (
+        <>
+          <h1>Bigfoot Frontend</h1>
+          <div className="card">
+            <h3>Bigfoot Sightings</h3>
+            <SightingsList sightings={BFSightings} />
+          </div>
+        </>
+      ) : (
+        <div>
+          <h1>Hello World</h1>
+          <h3>Welcome to Big Foot Sightings!</h3>
+        </div>
+      )}
     </>
   );
 }
