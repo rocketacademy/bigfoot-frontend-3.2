@@ -53,3 +53,9 @@
 .report-detail{
   text-align: left;
 }
+
+.observed, .witnesses, .report__content-header{
+  line-height: 2rem;
+  text-align: left;
+  font-weight: 100;
+}

@@ -12,7 +12,6 @@ function Home(props) {
     axios
       .get("http://localhost:3001/sightings")
       .then((res) => {
-        console.log(res.data);
         setSightings(res.data);
       })
       .catch((err) => console.log(err));
