@@ -81,6 +81,4 @@ function Sightings() {
   );
 }
 
-//<button onClick={() => nav(`/0`)}>View Sighting</button>
-
 export default Sightings;
