@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { backendURL } from "../db";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SightingsList from "./SightingList";
 
 function Sightings() {
-  const [BFSightings, setBFSightings] = useState([]);
-
   const { sightingIndex } = useParams();
+
+  const [BFSightings, setBFSightings] = useState([]);
+  const [page, setPage] = useState(Number(sightingIndex));
+
   console.log("page id", sightingIndex);
+  console.log("current page", page);
+
+  const nav = useNavigate();
 
   // pull data from localhost 3000
   // use async and await
@@ -21,6 +26,7 @@ function Sightings() {
         const bigFootData = response.data;
         // store data in states
         setBFSightings(bigFootData);
+
         console.log(`bigfoot sightings`, bigFootData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,24 +35,52 @@ function Sightings() {
     bigfootdata();
   }, [sightingIndex]);
 
+  const handlePrevPage = () => {
+    const updatedPage = page - 1;
+    setPage(updatedPage);
+    console.log("prev page", updatedPage);
+    nav(`/${updatedPage}`);
+  };
+
+  const handleNextPage = () => {
+    const updatedPage = page + 1;
+    setPage(updatedPage);
+    console.log("next page", updatedPage);
+    nav(`/${updatedPage}`);
+  };
+
+  const handlePageOne = () => {
+    nav(`/0`);
+    setPage(Number(0));
+  };
+
   return (
     <>
       {sightingIndex ? (
         <>
-          <h1>Bigfoot Frontend</h1>
           <div className="card">
             <h3>Bigfoot Sightings</h3>
             <SightingsList sightings={BFSightings} />
           </div>
+          {sightingIndex >= 1 ? (
+            <button onClick={handlePrevPage}>Previous Sighting</button>
+          ) : null}
+          <button onClick={handleNextPage}>Next Sighting</button>
+
+          <br />
+          <button onClick={() => nav("/")}>Home</button>
         </>
       ) : (
         <div>
           <h1>Hello World</h1>
-          <h3>Welcome to Big Foot Sightings!</h3>
+          <h3>Welcome to Bigfoot Sightings!</h3>
+          <button onClick={handlePageOne}>View Sighting</button>
         </div>
       )}
     </>
   );
 }
+
+//<button onClick={() => nav(`/0`)}>View Sighting</button>
 
 export default Sightings;
