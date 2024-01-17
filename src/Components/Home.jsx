@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "/logo.png";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "./constants";
 import Dropdown from "react-bootstrap/Dropdown";
 
 function Home(props) {
   let { sightings, setSightings } = props;
-  // const [searchParams, setSearchParams] = useState('')
-
-  // let { query } = useSearchParams
 
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //   console.log(query)
-  // },[])
 
   useEffect(() => {
     axios
@@ -85,13 +79,6 @@ function Home(props) {
           className={className}
           aria-labelledby={labeledBy}
         >
-          {/* <Form.Control
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-          /> */}
           <ul className="list-unstyled">
             {React.Children.toArray(children).filter(
               (child) =>
