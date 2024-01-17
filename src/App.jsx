@@ -20,6 +20,10 @@ function App() {
           path: ":sightingIndex",
           element: <IndividualSighting sightings={sightings} />,
         },
+        {
+          path: "filter",
+          element: <Home sightings={sightings} setSightings={setSightings} />,
+        },
       ],
     },
   ]);
