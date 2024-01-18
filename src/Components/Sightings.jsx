@@ -3,6 +3,7 @@ import axios from "axios";
 import { backendURL } from "../db";
 import { useNavigate, useParams } from "react-router-dom";
 import SightingsList from "./SightingList";
+import AllSightings from "./AllSightings";
 
 function Sightings() {
   const { sightingIndex } = useParams();
@@ -74,7 +75,9 @@ function Sightings() {
         <div>
           <h1>Hello World</h1>
           <h3>Welcome to Bigfoot Sightings!</h3>
-          <button onClick={handlePageOne}>View Sighting</button>
+          <AllSightings />
+          <br />
+          <button onClick={handlePageOne}>View Sightings</button>
         </div>
       )}
     </>

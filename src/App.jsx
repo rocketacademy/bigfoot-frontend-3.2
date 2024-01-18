@@ -1,6 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Sightings from "./Components/sightings";
+import Sightings from "./Components/Sightings";
+import AllSightings from "./Components/AllSightings";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +19,15 @@ function App() {
       element: (
         <div>
           <Sightings />
+          <br />
+        </div>
+      ),
+    },
+    {
+      path: "/allsightings",
+      element: (
+        <div>
+          <AllSightings />
           <br />
         </div>
       ),
