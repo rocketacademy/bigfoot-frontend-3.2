@@ -8,14 +8,15 @@ function AllSightings() {
   //search terms
   const [term, setTerm] = useState("");
 
+  //search items from the URL
   const [searchParams, setSearchParams] = useSearchParams({
     //query = q
     q: "",
-    data: false,
   });
 
+  //show query on URL
   const q = searchParams.get("q");
-  const data = searchParams.get("data") === "true";
+  console.log("query", q);
 
   // pull data from localhost 3000
   // use async and await
@@ -34,13 +35,13 @@ function AllSightings() {
     bigfootdata();
   }, []);
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Update the query parameter in the URL when the form is submitted
+    // update the query parameter in the URL when the form is submitted
     setSearchParams({ q: term });
   };
 
+  //search query based on all sightings' data
   const filteredSightings = BFSightings.filter((sighting) =>
     `${sighting.DATE} ${sighting.MONTH} ${sighting.YEAR} ${sighting.SEASON} ${sighting.LOCATION_DETAILS} ${sighting.STATE} ${sighting.OBSERVED}`
       .toLowerCase()
