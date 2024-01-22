@@ -1,19 +1,22 @@
-import logo from "/logo.png";
-
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Sightings from "./sightings";
+import IndividualSightings from "./individualSightings";
 import "./App.css";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Sightings />,
+    },
+    {
+      path: "/sightings/:sightingIndex",
+      element: <IndividualSightings />,
+    },
+  ]);
   return (
     <>
-      <div>
-        <img src={logo} className="logo react" alt="React logo" />
-      </div>
-      <h1>Bigfoot Frontend </h1>
-      <div className="card">
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      <RouterProvider router={router} />
     </>
   );
 }
