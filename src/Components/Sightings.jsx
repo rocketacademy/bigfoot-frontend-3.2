@@ -4,7 +4,6 @@ import { backendURL } from "../db";
 import { useNavigate, useParams } from "react-router-dom";
 import SightingsList from "./SightingList";
 import AllSightings from "./AllSightings";
-import NewSightingForm from "./NewSightingForm";
 
 function Sightings() {
   const { sightingIndex } = useParams();
