@@ -43,7 +43,7 @@ function AllSightings() {
 
   //search query based on all sightings' data
   const filteredSightings = BFSightings.filter((sighting) =>
-    `${sighting.DATE} ${sighting.MONTH} ${sighting.YEAR} ${sighting.SEASON} ${sighting.LOCATION_DETAILS} ${sighting.STATE} ${sighting.OBSERVED}`
+    `${sighting.date} ${sighting.location} ${sighting.notes} ${sighting.updatedAt}`
       .toLowerCase()
       .includes(q.toLowerCase())
   );
@@ -56,18 +56,16 @@ function AllSightings() {
           <strong>Sighting {index + 1}:</strong>
           <ul>
             <li>
-              <strong>Date: </strong> {sighting.DATE} {sighting.MONTH},{" "}
-              {sighting.YEAR}
+              <strong>Date: </strong> {sighting.date}
             </li>
             <li>
-              <strong>Season:</strong> {sighting.SEASON}
+              <strong>Location</strong> {sighting.location}
             </li>
             <li>
-              <strong>Location:</strong> {sighting.LOCATION_DETAILS},{" "}
-              {sighting.STATE}
+              <strong>Notes:</strong> {sighting.notes}, {sighting.STATE}
             </li>
             <li>
-              <strong>Observation:</strong> {sighting.OBSERVED}
+              <strong>Updated At:</strong> {sighting.updatedAt}
             </li>
             <br />
           </ul>

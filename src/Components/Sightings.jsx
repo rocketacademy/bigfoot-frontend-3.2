@@ -51,8 +51,8 @@ function Sightings() {
   };
 
   const handlePageOne = () => {
-    nav(`/0`);
-    setPage(Number(0));
+    nav(`/1`);
+    setPage(Number(1));
   };
 
   return (

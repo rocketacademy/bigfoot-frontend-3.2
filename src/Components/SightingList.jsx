@@ -7,21 +7,16 @@ const SightingsList = ({ sightings }) => {
   return (
     <ul>
       <li>
-        <strong>Sighting {Number(sightingIndex) + 1}:</strong>
+        <strong>Sighting {Number(sightingIndex)}:</strong>
         <ul>
           <li>
-            <strong>Date: </strong> {sightings.DATE} {sightings.MONTH},{" "}
-            {sightings.YEAR}
+            <strong>Date:</strong> {sightings.date}
           </li>
           <li>
-            <strong>Season:</strong> {sightings.SEASON}
+            <strong>Location:</strong> {sightings.location}
           </li>
           <li>
-            <strong>Location:</strong> {sightings.LOCATION_DETAILS},{" "}
-            {sightings.STATE}
-          </li>
-          <li>
-            <strong>Observation:</strong> {sightings.OBSERVED}
+            <strong>Notes:</strong> {sightings.notes}
           </li>
           <br />
         </ul>
