@@ -63,7 +63,7 @@ function Sightings() {
             <h3>Bigfoot Sightings</h3>
             <SightingsList sightings={BFSightings} />
           </div>
-          {sightingIndex >= 1 ? (
+          {sightingIndex >= 2 ? (
             <button onClick={handlePrevPage}>Previous Sighting</button>
           ) : null}
           <button onClick={handleNextPage}>Next Sighting</button>

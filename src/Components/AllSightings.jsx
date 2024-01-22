@@ -51,9 +51,9 @@ function AllSightings() {
   //display all sightings
   const SightingsList = ({ sightings }) => (
     <ul>
-      {sightings.map((sighting, index) => (
-        <li key={index}>
-          <strong>Sighting {index + 1}:</strong>
+      {sightings.map((sighting) => (
+        <li key={sighting.id}>
+          <strong>Sighting {sighting.id}:</strong>
           <ul>
             <li>
               <strong>Date: </strong> {sighting.date}
