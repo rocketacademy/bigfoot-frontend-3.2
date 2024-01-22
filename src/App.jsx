@@ -2,6 +2,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Sightings from "./Components/Sightings";
 import AllSightings from "./Components/AllSightings";
+import NewSightingForm from "./Components/NewSightingForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,15 @@ function App() {
       element: (
         <div>
           <AllSightings />
+          <br />
+        </div>
+      ),
+    },
+    {
+      path: "/reportbigfoot",
+      element: (
+        <div>
+          <NewSightingForm />
           <br />
         </div>
       ),

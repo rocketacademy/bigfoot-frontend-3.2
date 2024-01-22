@@ -4,6 +4,7 @@ import { backendURL } from "../db";
 import { useNavigate, useParams } from "react-router-dom";
 import SightingsList from "./SightingList";
 import AllSightings from "./AllSightings";
+import NewSightingForm from "./NewSightingForm";
 
 function Sightings() {
   const { sightingIndex } = useParams();
@@ -55,6 +56,10 @@ function Sightings() {
     setPage(Number(1));
   };
 
+  const handleForm = () => {
+    nav(`/reportbigfoot`);
+  };
+
   return (
     <>
       {sightingIndex ? (
@@ -75,6 +80,7 @@ function Sightings() {
         <div>
           <h1>Hello World</h1>
           <h3>Welcome to Bigfoot Sightings!</h3>
+          <button onClick={handleForm}>Report Bigfoot!</button>
           <AllSightings />
           <br />
           <button onClick={handlePageOne}>View Sightings</button>
