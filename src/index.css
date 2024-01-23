@@ -67,3 +67,57 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.sightings-all {
+  display: grid;
+  background-color: grey;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sighting-info-preview {
+  display: inline;
+}
+
+.sighting-info {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: fit-content;
+}
+
+.sighting-observed-info {
+  grid-area: 1 / 1 / 4 / 6;
+}
+.sighting-observed-season {
+  grid-area: 4 / 1 / 5 / 2;
+}
+.sighting-observed-county {
+  grid-area: 4 / 2 / 5 / 3;
+}
+.sighting-observed-location-details {
+  grid-area: 4 / 3 / 5 / 4;
+}
+.sighting-observed-other-witnesses {
+  grid-area: 4 / 4 / 5 / 5;
+}
+.sighting-observed-time-and-conditions {
+  grid-area: 4 / 5 / 5 / 6;
+}
+.sighting-observed-report-number {
+  grid-area: 5 / 1 / 6 / 3;
+}
+.sighting-observed-report-class {
+  grid-area: 5 / 3 / 6 / 4;
+}
+.sighting-observed-year {
+  grid-area: 5 / 4 / 6 / 6;
+}
+.sighting-observed-go-back-button {
+  grid-area: 6 / 3 / 7 / 4;
+}
