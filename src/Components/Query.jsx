@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { BASE_URL } from "./Constants";
+import { useEffect, useState } from "react";
+import BASE_URL from "./Constants";
 
 export default function Query() {
-  const [sightingIndex, setSightingIndex] = useState();
+  const [sightingIndex, setSightingIndex] = useState("");
 
   // Update sighting index in state if needed to trigger data retrieval
   const params = useParams();
-  if (sightingIndex !== params.sightingId) {
+  useEffect(() => {
     setSightingIndex(params.sightingId);
-  }
+  }, [params.sightingId]);
 
   const fetcher = async (url) => (await axios.get(url)).data;
   const {
@@ -32,9 +32,15 @@ export default function Query() {
     return <>Error: {error.message}</>;
   }
 
+  // const sightingRendered = Object.keys(sighting).map((key) => (
+  //   <li key={key}>
+  //     {key}: {sighting[key]}
+  //   </li>
+  // ));
+
   return (
     <>
-      Sightings: <br />
+      Sighting {params.sightingId}: <br />
       Year: {sighting?.YEAR}, Season: {sighting?.SEASON}, Month:{" "}
       {sighting.MONTH ?? "N/A"}
     </>

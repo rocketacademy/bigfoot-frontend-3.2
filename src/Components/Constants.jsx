@@ -1,4 +1,3 @@
-const PORT = import.meta.env.VITE_PORT;
-const BASE_URL = `http://localhost:${PORT}/sightings`;
+const BASE_URL = `http://localhost:${import.meta.env.VITE_PORT}/sightings`;
 
-export { BASE_URL };
+export default BASE_URL;

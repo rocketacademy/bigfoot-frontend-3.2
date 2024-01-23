@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { BASE_URL } from "./Constants";
+import BASE_URL from "./Constants";
 
 export default function QueryAll() {
   const fetcher = async (url) => (await axios.get(url)).data;
