@@ -32,17 +32,16 @@ export default function Query() {
     return <>Error: {error.message}</>;
   }
 
-  // const sightingRendered = Object.keys(sighting).map((key) => (
-  //   <li key={key}>
-  //     {key}: {sighting[key]}
-  //   </li>
-  // ));
-
   return (
     <>
       Sighting {params.sightingId}: <br />
-      Year: {sighting?.YEAR}, Season: {sighting?.SEASON}, Month:{" "}
-      {sighting.MONTH ?? "N/A"}
+      <ul>
+        {Object.keys(sighting).map((key) => (
+          <li key={key}>
+            {key}: {`${sighting[key]}`}
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
