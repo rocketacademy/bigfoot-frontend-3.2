@@ -1,8 +1,15 @@
 import logo from "/logo.png";
-
+import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/sightings");
+  }, []);
+
   return (
     <>
       <div>
@@ -11,8 +18,11 @@ function App() {
       <h1>Bigfoot Frontend </h1>
       <div className="card">
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Welcome to Bigfoot Sightings.com! Click on a sighting to find out more
+          about it.
         </p>
+
+        <Outlet />
       </div>
     </>
   );
