@@ -91,8 +91,8 @@ function Sightings() {
   };
 
   const handlePageOne = () => {
-    nav(`/1`);
-    setPage(Number(1));
+    nav(`/2`);
+    setPage(Number(2));
   };
 
   const handleForm = () => {
