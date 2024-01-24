@@ -4,8 +4,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  createRoutesFromElements,
   Outlet,
   Link,
 } from "react-router-dom";
@@ -15,39 +13,39 @@ import Query from "./Components/Query";
 const queryClient = new QueryClient();
 
 export default function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route
-        path="/"
-        element={
-          <>
-            <Link to="/">Home</Link> <br />
-            <br />
-            <Outlet />
-          </>
-        }>
-        <Route
-          index
-          element={
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <>
+          <Link to="/">Home</Link>
+          <br />
+          <Link to="/sightings">Sighting list</Link>
+          <br />
+          <Outlet />
+        </>
+      ),
+      children: [
+        {
+          path: "/sightings",
+          element: (
             <QueryClientProvider client={queryClient}>
               <QueryAll />
             </QueryClientProvider>
-          }
-        />
-        {/* Route that renders individual sightings */}
-        <Route
-          path="sightings/:sightingId"
-          element={
+          ),
+        },
+        {
+          path: "/sightings/:sightingId",
+          element: (
             <QueryClientProvider client={queryClient}>
               <Query />
             </QueryClientProvider>
-          }
-        />
-        {/* Route that matches all other paths */}
-        <Route path="*" element={"Nothing here!"} />
-      </Route>
-    )
-  );
+          ),
+        },
+        { path: "*", element: <>Nothing here!</> },
+      ],
+    },
+  ]);
 
   return (
     <>
