@@ -27,8 +27,6 @@ function Sightings() {
         const bigFootData = response.data;
         // store data in states
         setBFSightings(bigFootData);
-
-        console.log(`bigfoot sightings`, bigFootData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -68,29 +66,29 @@ function Sightings() {
 
     while (nextPage >= 1) {
       try {
-        // Fetch data for the next page
+        // fetch data for the next page
         const response = await axios.get(`${backendURL}/sightings/${nextPage}`);
         const nextSightings = response.data;
 
-        // Check if valid data exists for the next page
+        // check if data exists for the next page
         if (nextSightings && Object.keys(nextSightings).length > 0) {
           setPage(nextPage);
           console.log("Next page:", nextPage);
           nav(`/${nextPage}`);
-          break; // Exit the loop if valid data is found
+          break; // break loop if data exists
         } else {
           console.log("No content in the next index");
           nextPage += 1; // Update nextPage and continue the loop
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        // Handle error, show user feedback, etc.
-        break; // Exit the loop in case of an error
+        break;
       }
     }
   };
 
   const handlePageOne = () => {
+    //accidentally deleted /1
     nav(`/2`);
     setPage(Number(2));
   };

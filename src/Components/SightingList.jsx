@@ -6,11 +6,7 @@ import { useState, useEffect } from "react";
 import EditSightingForm from "./EditSightingForm";
 
 const SightingsList = ({ sightings }) => {
-  console.log("logged sights", sightings);
-
   const { sightingIndex } = useParams();
-
-  console.log("sighting index", sightingIndex);
 
   const nav = useNavigate();
 
@@ -28,20 +24,18 @@ const SightingsList = ({ sightings }) => {
     axios
       .delete(`${backendURL}/sightings/${sightingIndex}`)
       .then(() => {
-        // Go to the homepage
+        // go to the homepage
         nav(`/`);
       })
       .catch((error) => {
         console.error("Error deleting sighting:", error);
-        // Handle error, show user feedback, etc.
       });
   };
 
   useEffect(() => {
-    // Fetch the current sighting details using the sightingIndex
+    // fetch the current sighting details using the sightingIndex
     axios.get(`${backendURL}/sightings/${sightingIndex}`).then((response) => {
       setSighting(response.data);
-      console.log("anything changes?", sighting);
     });
   }, [sightingIndex, sighting]);
 
@@ -54,7 +48,7 @@ const SightingsList = ({ sightings }) => {
     axios
       .put(`${backendURL}/sightings/${sightingIndex}`, updatedSighting)
       .then(() => {
-        // After successful update, navigate back to the details page
+        // after successful update, navigate back to the details page
         nav(`/${sightingIndex}`);
       })
       .catch((error) => {
