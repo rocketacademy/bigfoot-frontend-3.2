@@ -1,196 +1,207 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "/logo.png";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "./constants";
-import Dropdown from "react-bootstrap/Dropdown";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
 function Home(props) {
-  let { sightings, setSightings } = props;
+	let { sightings, setSightings } = props;
+	const [dateValue, setDateValue] = useState("");
+	const [locationValue, setLocationValue] = useState("");
+	const [noteValue, setNoteValue] = useState("");
+	const [show, setShow] = useState(false);
+	const [editing, setEditing] = useState(false);
+	const [sightingEdit, setSightingEdit] = useState({});
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
+	const handleClose = () => {
+		setShow(false);
+		setEditing(false);
+		setDateValue("");
+		setLocationValue("");
+		setNoteValue("");
+		setSightingEdit({});
+	};
+	const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    axios
-      .get(`${BACKEND_URL}/sightings`)
-      .then((res) => {
-        setSightings(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+	const getSightings = async () => {
+		await axios
+			.get(`${BACKEND_URL}/sightings`)
+			.then((res) => {
+				console.log(res.data);
+				setSightings(res.data);
+			})
+			.catch((err) => console.log(err));
+	};
 
-  const sightingArr = sightings.map((sighting, index) => (
-    <li key={index} className="report-list__item">
-      <div
-        className="list__item-container"
-        onClick={() => navigate(`/sightings/${index}`)}
-      >
-        <div className="container__report-detail">
-          <p className="report-detail">{sighting.REPORT_NUMBER}</p>
-        </div>
-        <div className="container__report-detail">
-          <p className="report-detail">{sighting.STATE}</p>
-        </div>
-        <div className="container__report-detail">
-          <p className="report-detail">{sighting.COUNTY}</p>
-        </div>
-        <div className="container__report-detail">
-          <p className="report-detail">{sighting.YEAR}</p>
-        </div>
-        <div className="container__report-detail">
-          <p className="report-detail">{sighting.REPORT_CLASS}</p>
-        </div>
-      </div>
-    </li>
-  ));
+	const handleSubmit = () => {
+		axios
+			.post(`${BACKEND_URL}/sightings`, {
+				date: dateValue,
+				location: locationValue,
+				notes: noteValue,
+			})
+			.then((res) => {
+				console.log(res);
+				handleClose();
+				getSightings();
+			})
+			.catch((err) => console.log(err));
+	};
+	const handleDelete = (id) => {
+		axios
+			.delete(`${BACKEND_URL}/sightings/${id}`)
+			.then(() => {
+				console.log("Successfully deleted");
+				getSightings();
+			})
+			.catch((err) => console.log(err));
+	};
 
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        className="bi bi-caret-down-fill"
-        viewBox="0 0 16 16"
-      >
-        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-      </svg>
-    </a>
-  ));
+	const handleStartEdit = (id) => {
+		setEditing(true);
+		axios
+			.get(`${BACKEND_URL}/sightings/${id}`)
+			.then((res) => {
+				console.log(res.data);
+				setSightingEdit(res.data);
+			})
+			.catch((err) => console.log(err));
+		setShow(true);
+	};
+	const handleUpdate = (id) => {
+		axios
+			.put(`${BACKEND_URL}/sightings/${id}`, {
+				date: dateValue,
+				location: locationValue,
+				notes: noteValue,
+			})
+			.then((res) => {
+				console.log("updated successfully");
+				handleClose();
+				getSightings();
+			})
+			.catch((err) => console.log(err));
+	};
 
-  const CustomMenu = React.forwardRef(
-    ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
-      const [value, setValue] = useState("");
+	useEffect(() => {
+		console.log(sightingEdit.id);
+		if (editing) {
+			setDateValue(sightingEdit.date);
+			setLocationValue(sightingEdit.location);
+			setNoteValue(sightingEdit.notes);
+		}
+	}, [sightingEdit, editing]);
 
-      return (
-        <div
-          ref={ref}
-          style={style}
-          className={className}
-          aria-labelledby={labeledBy}
-        >
-          <ul className="list-unstyled">
-            {React.Children.toArray(children).filter(
-              (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value)
-            )}
-          </ul>
-        </div>
-      );
-    }
-  );
+	useEffect(() => {
+		getSightings();
+	}, []);
 
-  return (
-    <>
-      <div>
-        <img
-          src={logo}
-          className="logo react"
-          alt="React logo"
-          onClick={() => navigate("/")}
-        />
-      </div>
-      <h1>Bigfoot Frontend </h1>
-      <p>
-        <small>You know what they say about big feet...</small>
-      </p>
-      <div className="card">
-        <ol className="report-list">
-          <div className="report-list__header">
-            <div className="list__item-container">
-              <div className="container__report-detail report-header">
-                <p className="report-header">Report Number</p>
-              </div>
-              <div className="container__report-detail report-header">
-                <Dropdown>
-                  <Dropdown.Toggle
-                    as={CustomToggle}
-                    id="dropdown-custom-components"
-                  >
-                    STATE
-                  </Dropdown.Toggle>
+	const sightingArr = sightings.map((sighting) => (
+		<li key={sighting.id} className="report-list__item">
+			<div className="list__item-container">
+				<div className="container__report-detail">
+					<p className="report-detail">{sighting.location}</p>
+				</div>
+				<div className="container__report-detail">
+					<p className="report-detail">
+						{new Date(sighting.date).toLocaleDateString()}
+					</p>
+				</div>
+				<button onClick={() => navigate(`/sightings/${sighting.id}`)}>
+					View
+				</button>
+				<button onClick={() => handleDelete(sighting.id)}>Delete</button>
+				<button onClick={() => handleStartEdit(sighting.id)}>Edit</button>
+			</div>
+		</li>
+	));
 
-                  <Dropdown.Menu as={CustomMenu}>
-                    {[
-                      ...new Set(sightings.map((sighting) => sighting.STATE)),
-                    ].map((uniq, index) => (
-                      <Dropdown.Item
-                        onClick={() => {
-                          navigate(`/sightings/filter?STATE=${uniq}`);
-                          axios
-                            .get(
-                              `${BACKEND_URL}/sightings/filter?STATE=${uniq}`
-                            )
-                            .then((res) => {
-                              setSightings(res.data);
-                            });
-                        }}
-                        key={index}
-                      >
-                        {uniq}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-              <div className="container__report-detail report-header">
-                <p className="report-header">COUNTY</p>
-              </div>
-              <div className="container__report-detail report-header">
-                <p className="report-header">YEAR</p>
-              </div>
-              <div className="container__report-detail report-header">
-                {/* <p className="report-header">REPORT CLASS</p> */}
-                <Dropdown>
-                  <Dropdown.Toggle
-                    as={CustomToggle}
-                    id="dropdown-custom-components"
-                  >
-                    REPORT CLASS
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu as={CustomMenu}>
-                    {[
-                      ...new Set(
-                        sightings.map((sighting) => sighting.REPORT_CLASS)
-                      ),
-                    ].map((uniq, index) => (
-                      <Dropdown.Item
-                        onClick={() => {
-                          navigate(`/sightings/filter?REPORT_CLASS=${uniq}`);
-                          axios
-                            .get(
-                              `${BACKEND_URL}/sightings/filter?REPORT_CLASS=${uniq}`
-                            )
-                            .then((res) => {
-                              setSightings(res.data);
-                            });
-                        }}
-                        key={index}
-                      >
-                        {uniq}
-                      </Dropdown.Item>
-                    ))}
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
-            </div>
-          </div>
-          {sightingArr}
-        </ol>
-      </div>
-    </>
-  );
+	return (
+		<>
+			<div>
+				<img
+					src={logo}
+					className="logo react"
+					alt="React logo"
+					onClick={() => navigate("/")}
+				/>
+			</div>
+			<div>
+				<button onClick={handleShow}>Add Sighting</button>
+				<Modal show={show} onHide={handleClose}>
+					<Modal.Header closeButton>
+						<Modal.Title>Add a sighting</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Form>
+							<Form.Group
+								className="mb-3"
+								controlId="exampleForm.ControlInput1"
+							>
+								<Form.Label>Location</Form.Label>
+								<Form.Control
+									type="text"
+									value={locationValue}
+									onChange={(e) => {
+										setLocationValue(e.target.value);
+									}}
+									placeholder="Anywhere, Anyplace"
+								/>
+							</Form.Group>
+							<Form.Group
+								className="mb-3"
+								controlId="exampleForm.ControlInput1"
+							>
+								<Form.Label>Date</Form.Label>
+								<Form.Control
+									type="date"
+									value={dateValue}
+									onChange={(e) => {
+										setDateValue(e.target.value);
+									}}
+								/>
+							</Form.Group>
+							<Form.Group
+								className="mb-3"
+								controlId="exampleForm.ControlTextarea1"
+							>
+								<Form.Label>Notes</Form.Label>
+								<Form.Control
+									as="textarea"
+									value={noteValue}
+									onChange={(e) => {
+										setNoteValue(e.target.value);
+									}}
+									rows={3}
+								/>
+							</Form.Group>
+						</Form>
+					</Modal.Body>
+					<Modal.Footer>
+						<button onClick={handleClose}>Close</button>
+						{editing ? (
+							<button onClick={() => handleUpdate(sightingEdit.id)}>
+								Update
+							</button>
+						) : (
+							<button onClick={handleSubmit}>Submit</button>
+						)}
+					</Modal.Footer>
+				</Modal>
+			</div>
+			<h1>Bigfoot Frontend </h1>
+			<p>
+				<small>You know what they say about big feet...</small>
+			</p>
+			<div className="card">
+				<ul className="report-list">{sightingArr}</ul>
+			</div>
+		</>
+	);
 }
 
 export default Home;
