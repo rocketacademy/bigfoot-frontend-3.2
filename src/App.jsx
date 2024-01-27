@@ -1,7 +1,7 @@
 import logo from "/logo.png";
 import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const navigate = useNavigate();
@@ -19,9 +19,10 @@ function App() {
       <div className="card">
         <p>
           Welcome to Bigfoot Sightings.com! Click on a sighting to find out more
-          about it.
+          about it. Saw Bigfoot recently? Click the link below!
         </p>
 
+        <Link to="/sightings/new">Enter Bigfoot Sighting</Link>
         <Outlet />
       </div>
     </>

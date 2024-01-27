@@ -36,49 +36,17 @@ const IndividualSightingInfo = () => {
   return (
     <div className="sighting-info">
       <div className="sighting-observed-info">
-        <p>{individualsightingdata.OBSERVED}</p>
+        <p>{individualsightingdata.notes}</p>
       </div>
 
       <div className="sighting-observed-year">
-        <p>YEAR:</p>
-        <p>{individualsightingdata.YEAR}</p>
+        <p>Year:</p>
+        <p>{individualsightingdata.date}</p>
       </div>
 
       <div className="sighting-observed-season">
-        <p>SEASON:</p>
-        <p>{individualsightingdata.SEASON}</p>
-        <p>YEAR:</p>
-        <p>{individualsightingdata.YEAR}</p>
-      </div>
-
-      <div className="sighting-observed-county">
-        <p>COUNTY:</p>
-        <p>{individualsightingdata.STATE}</p>
-      </div>
-
-      <div className="sighting-observed-location-details">
-        <p>LOCATION DETAILS:</p>
-        <p>{individualsightingdata.LOCATION_DETAILS}</p>
-      </div>
-
-      <div className="sighting-observed-other-witnesses">
-        <p>OTHER WITNESSES:</p>
-        <p>{individualsightingdata.OTHER_WITNESSES}</p>
-      </div>
-
-      <div className="sighting-observed-time-and-conditions">
-        <p>TIME AND CONDITIONS:</p>
-        <p>{individualsightingdata.TIME_AND_CONDITIONS}</p>
-      </div>
-
-      <div className="sighting-observed-report-number">
-        <p>REPORT NUMBER:</p>
-        <p>{individualsightingdata.REPORT_NUMBER}</p>
-      </div>
-
-      <div className="sighting-observed-report-class">
-        <p>REPORT CLASS:</p>
-        <p>{individualsightingdata.REPORT_CLASS}</p>
+        <p>Location:</p>
+        <p>{individualsightingdata.location}</p>
       </div>
 
       <div className="sighting-observed-go-back-button">

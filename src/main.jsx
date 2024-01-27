@@ -6,6 +6,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import IndividualSightingInfo from "./IndividualSightingInfo.jsx";
+import NewSightingSubmission from "./NewSightingSubmission.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/sightings/:sightingIndex",
     element: <IndividualSightingInfo />,
+  },
+  {
+    path: "/sightings/new",
+    element: <NewSightingSubmission />,
   },
 ]);
 

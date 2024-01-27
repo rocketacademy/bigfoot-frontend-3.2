@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const IndividualSighting = ({ year, season, state, county, index }) => {
+const IndividualSighting = ({ date, location, sightingid }) => {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    navigate(`/sightings/${index}`);
+    navigate(`/sightings/${sightingid}`);
   };
 
   return (
@@ -13,27 +13,17 @@ const IndividualSighting = ({ year, season, state, county, index }) => {
         <div
           onClick={handleClick}
           //eslint-disable-next-line react/no-unknown-property
-          index={index}
+          sightingId={sightingid}
           className="sightings-all"
         >
           <div className="sighting-info-preview">
-            <p>Year:</p>
-            <p>{year}</p>
+            <p>Date:</p>
+            <p>{date}</p>
           </div>
 
           <div className="sighting-info-preview">
-            <p>Season:</p>
-            <p>{season}</p>
-          </div>
-
-          <div className="sighting-info-preview">
-            <p>State:</p>
-            <p>{state}</p>
-          </div>
-
-          <div className="sighting-info-preview">
-            <p>County:</p>
-            <p>{county}</p>
+            <p>Location:</p>
+            <p>{location}</p>
           </div>
         </div>
       </>
