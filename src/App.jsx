@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import QueryAll from "./Components/QueryAll";
 import Query from "./Components/Query";
+import Post from "./Components/Post";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,8 @@ export default function App() {
           <Link to="/">Home</Link>
           <br />
           <Link to="/sightings">Sighting list</Link>
+          <br />
+          <Link to="/new">Submission Form</Link>
           <br />
           <Outlet />
         </>
@@ -39,6 +42,14 @@ export default function App() {
           element: (
             <QueryClientProvider client={queryClient}>
               <Query />
+            </QueryClientProvider>
+          ),
+        },
+        {
+          path: "/new",
+          element: (
+            <QueryClientProvider client={queryClient}>
+              <Post />
             </QueryClientProvider>
           ),
         },

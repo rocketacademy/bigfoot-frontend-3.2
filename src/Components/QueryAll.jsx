@@ -28,11 +28,11 @@ export default function QueryAll() {
     <>
       Sightings:
       <ul>
-        {sightings?.map((sighting, index) => (
-          <li key={index}>
-            <Link to={`/sightings/${index}`}>
-              Year: {sighting?.YEAR}, Season: {sighting?.SEASON}, Month:{" "}
-              {sighting.MONTH ?? "N/A"}
+        {sightings?.map((sighting) => (
+          <li key={sighting.id}>
+            <Link to={`/sightings/${sighting.id}`}>
+              Date: {new Date(sighting?.date).toLocaleDateString()}, Location:{" "}
+              {sighting?.location}
             </Link>
           </li>
         ))}

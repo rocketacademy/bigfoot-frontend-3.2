@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import BASE_URL from "./Constants";
 
 export default function Query() {
-  const [sightingIndex, setSightingIndex] = useState("");
+  const [sightingId, setsightingId] = useState("");
 
   // Update sighting index in state if needed to trigger data retrieval
   const params = useParams();
   useEffect(() => {
-    setSightingIndex(params.sightingId);
+    setsightingId(params.sightingId);
   }, [params.sightingId]);
 
   const fetcher = async (url) => (await axios.get(url)).data;
@@ -20,8 +20,8 @@ export default function Query() {
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["sighting", `${BASE_URL}/${sightingIndex}`],
-    queryFn: () => fetcher(`${BASE_URL}/${sightingIndex}`),
+    queryKey: ["sighting", `${BASE_URL}/${sightingId}`],
+    queryFn: () => fetcher(`${BASE_URL}/${sightingId}`),
   });
 
   if (isPending) {
