@@ -17,11 +17,17 @@ export default function NewSightingForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // extract category id
+    const selectedCategoryIds = selectedCategories.map(({ value }) => value);
+    console.log("Selected Category IDs:", selectedCategoryIds);
+
     // send request to localhost
     axios
       .post(`${backendURL}/sightings`, {
         date,
         location,
+        //post selection cat id
+        selectedCategoryIds,
         notes,
       })
       .then((res) => {
@@ -29,6 +35,7 @@ export default function NewSightingForm() {
         setDate("");
         setLocation("");
         setNotes("");
+        setSelectedCategories([]);
         // view sightings as single sightings
         // set in params
         nav(`/${res.data.id}`);
@@ -50,6 +57,8 @@ export default function NewSightingForm() {
 
   // set category into filter
   const categoryOptions = allCategories.map((category) => ({
+    //add value to
+    value: category.id,
     // display category name
     label: category.name,
   }));
@@ -77,6 +86,7 @@ export default function NewSightingForm() {
         <br />
         <label>Categories: </label>
         <Select
+          //is multi = user can choose more than 1 option
           isMulti
           options={categoryOptions}
           value={selectedCategories}

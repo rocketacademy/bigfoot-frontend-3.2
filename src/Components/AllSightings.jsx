@@ -62,7 +62,13 @@ function AllSightings() {
               <strong>Location</strong> {sighting.location}
             </li>
             <li>
-              <strong>Notes:</strong> {sighting.notes}, {sighting.STATE}
+              <strong>Notes:</strong> {sighting.notes},
+            </li>
+            <li>
+              <strong>Categories: </strong>
+              {sighting.categories?.map((category) => (
+                <li key={category.id}>{category.name}</li>
+              ))}
             </li>
             <li>
               <strong>Updated At:</strong> {sighting.updatedAt}

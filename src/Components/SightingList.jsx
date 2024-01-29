@@ -113,6 +113,14 @@ const SightingsList = ({ sightings }) => {
               <li>
                 <strong>Notes:</strong> {sightings.notes}
               </li>
+              <li>
+                <strong>Categories:</strong>
+                <ul>
+                  {sightings.categories?.map((category) => (
+                    <li key={category.id}>{category.name}</li>
+                  ))}
+                </ul>
+              </li>
               <br />
             </ul>
 
