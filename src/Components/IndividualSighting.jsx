@@ -45,7 +45,7 @@ function IndividualSighting(props) {
 			}).catch(err=>console.log(err))
 	};
 
-	let { date, location, notes } = individualSightingData;
+	let { date, location, notes, categories } = individualSightingData;
 
 	return (
 		<>
@@ -53,6 +53,12 @@ function IndividualSighting(props) {
 			<h1>{location}</h1>
 			<br />
 			<h2>{date}</h2>
+		<h3>Categories</h3>
+		<ul>
+		{categories?.map(category=>(
+			<li key={category.id}>{category.name}</li>
+		))}
+		</ul>
 			<hr />
 			<h3 className="report__content-header">Report:</h3>
 			<p className="observed">{notes}</p>

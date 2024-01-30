@@ -39,6 +39,7 @@ function Home(props) {
       })
       .catch((err) => console.log(err));
   };
+	
 
   const handleSubmit = () => {
     axios
@@ -105,7 +106,6 @@ function Home(props) {
       .get(`${BACKEND_URL}/categories`)
       .then((res) => {
         setCategories(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -121,16 +121,12 @@ function Home(props) {
   }, []);
 
   const handleSelectChange = (categories) => {
-		console.log(categories)
 		let selectedCategoryArr=categories.map((category) =>{
 			return category.value
 		})
 		setCategoryInputValue(selectedCategoryArr)
 	};
 
-	useEffect(()=>{
-		console.log("Selected categoryInputValue's ID", categoryInputValue)
-	},[categoryInputValue])
 
 
   const sightingArr = sightings.map((sighting) => (
