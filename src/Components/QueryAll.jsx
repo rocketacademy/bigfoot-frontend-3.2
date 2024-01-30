@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BASE_URL from "./Constants";
+import { useEffect } from "react";
 
 export default function QueryAll() {
   const fetcher = async (url) => (await axios.get(url)).data;
@@ -12,9 +13,13 @@ export default function QueryAll() {
     isPending,
     isError,
   } = useQuery({
-    queryKey: ["sightings", BASE_URL],
-    queryFn: () => fetcher(BASE_URL),
+    queryKey: ["sightings", `${BASE_URL}/sightings`],
+    queryFn: () => fetcher(`${BASE_URL}/sightings`),
   });
+
+  useEffect(() => {
+    console.log(sightings);
+  }, [sightings]);
 
   if (isPending) {
     return <>Loading...</>;
@@ -32,7 +37,8 @@ export default function QueryAll() {
           <li key={sighting.id}>
             <Link to={`/sightings/${sighting.id}`}>
               Date: {new Date(sighting?.date).toLocaleDateString()}, Location:{" "}
-              {sighting?.location}
+              {sighting?.location} Cateogries:{" "}
+              {sighting?.categories?.map((category) => `${category.name} `)}
             </Link>
           </li>
         ))}
