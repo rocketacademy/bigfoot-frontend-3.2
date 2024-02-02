@@ -40,3 +40,25 @@
 .read-the-docs {
   color: #888;
 }
+
+.list__item-container, .list__header-container{
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.container__report-detail{
+  width: 10rem;
+}
+.report-detail, .report-header{
+  text-align: left;
+}
+
+.observed, .witnesses, .report__content-header{
+  line-height: 2rem;
+  text-align: left;
+  font-weight: 100;
+}
+.logo{
+  cursor: pointer;
+}

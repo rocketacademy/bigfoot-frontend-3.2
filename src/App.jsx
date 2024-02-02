@@ -1,19 +1,35 @@
-import logo from "/logo.png";
-
 import "./App.css";
+import { useState } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import IndividualSighting from "./Components/IndividualSighting";
+import Home from "./Components/Home";
 
 function App() {
+  const [sightings, setSightings] = useState([]);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home sightings={sightings} setSightings={setSightings} />,
+    },
+    {
+      path: "/sightings/",
+      children: [
+        {
+          path: ":sightingIndex",
+          element: <IndividualSighting sightings={sightings} />,
+        },
+        {
+          path: "filter",
+          element: <Home sightings={sightings} setSightings={setSightings} />,
+        },
+      ],
+    },
+  ]);
+
   return (
     <>
-      <div>
-        <img src={logo} className="logo react" alt="React logo" />
-      </div>
-      <h1>Bigfoot Frontend </h1>
-      <div className="card">
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      <RouterProvider router={router} />
     </>
   );
 }
