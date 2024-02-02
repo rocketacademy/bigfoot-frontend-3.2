@@ -1,21 +1,70 @@
 import logo from "/logo.png";
-
 import "./App.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+} from "react-router-dom";
+import QueryAll from "./Components/QueryAll";
+import Query from "./Components/Query";
+import Post from "./Components/Post";
 
-function App() {
+const queryClient = new QueryClient();
+
+export default function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <>
+          <Link to="/">Home</Link>
+          <br />
+          <Link to="/sightings">Sighting list</Link>
+          <br />
+          <Link to="/new">Submission Form</Link>
+          <br />
+          <Outlet />
+        </>
+      ),
+      children: [
+        {
+          path: "/sightings",
+          element: (
+            <QueryClientProvider client={queryClient}>
+              <QueryAll />
+            </QueryClientProvider>
+          ),
+        },
+        {
+          path: "/sightings/:sightingId",
+          element: (
+            <QueryClientProvider client={queryClient}>
+              <Query />
+            </QueryClientProvider>
+          ),
+        },
+        {
+          path: "/new",
+          element: (
+            <QueryClientProvider client={queryClient}>
+              <Post />
+            </QueryClientProvider>
+          ),
+        },
+        { path: "*", element: <>Nothing here!</> },
+      ],
+    },
+  ]);
+
   return (
     <>
       <div>
         <img src={logo} className="logo react" alt="React logo" />
       </div>
       <h1>Bigfoot Frontend </h1>
-      <div className="card">
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
+      <RouterProvider router={router} />
     </>
   );
 }
-
-export default App;
