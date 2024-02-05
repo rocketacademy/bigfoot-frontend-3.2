@@ -67,3 +67,48 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.sightings-all {
+  display: grid;
+  background-color: grey;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sighting-info-preview {
+  display: inline;
+}
+
+.sighting-info {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  height: fit-content;
+}
+
+.comments {
+  background-color: grey;
+}
+
+.sighting-observed-info {
+  grid-area: 1 / 1 / 4 / 6;
+  background-color: black;
+  height: fit-content;
+}
+
+.sighting-observed-year {
+  grid-area: 4 / 2 / 5 / 3;
+}
+
+.sighting-observed-location {
+  grid-area: 4 / 3 / 5 / 5;
+}
+
+.sighting-observed-go-back-button {
+  grid-area: 6 / 3 / 7 / 4;
+}
