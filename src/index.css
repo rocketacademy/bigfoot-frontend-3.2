@@ -91,33 +91,24 @@ button:focus-visible {
   height: fit-content;
 }
 
+.comments {
+  background-color: grey;
+}
+
 .sighting-observed-info {
   grid-area: 1 / 1 / 4 / 6;
+  background-color: black;
+  height: fit-content;
 }
-.sighting-observed-season {
-  grid-area: 4 / 1 / 5 / 2;
-}
-.sighting-observed-county {
+
+.sighting-observed-year {
   grid-area: 4 / 2 / 5 / 3;
 }
-.sighting-observed-location-details {
-  grid-area: 4 / 3 / 5 / 4;
+
+.sighting-observed-location {
+  grid-area: 4 / 3 / 5 / 5;
 }
-.sighting-observed-other-witnesses {
-  grid-area: 4 / 4 / 5 / 5;
-}
-.sighting-observed-time-and-conditions {
-  grid-area: 4 / 5 / 5 / 6;
-}
-.sighting-observed-report-number {
-  grid-area: 5 / 1 / 6 / 3;
-}
-.sighting-observed-report-class {
-  grid-area: 5 / 3 / 6 / 4;
-}
-.sighting-observed-year {
-  grid-area: 5 / 4 / 6 / 6;
-}
+
 .sighting-observed-go-back-button {
   grid-area: 6 / 3 / 7 / 4;
 }

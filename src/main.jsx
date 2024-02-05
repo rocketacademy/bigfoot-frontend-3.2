@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/sightings/:sightingIndex",
+    path: "/sightings/:sightingId",
     element: <IndividualSightingInfo />,
   },
   {

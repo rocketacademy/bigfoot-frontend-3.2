@@ -27,6 +27,14 @@ const NewSightingSubmission = () => {
     };
     console.log("I am sending the data!!");
     sendData();
+
+    setNewSighting({
+      date: "",
+      location: "",
+      notes: "",
+    });
+
+    alert("Submitted sighting!");
   };
 
   const handleChange = (e) => {
